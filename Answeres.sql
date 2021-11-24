@@ -17,7 +17,7 @@ select f.*
 --3
 select c.country
       ,count(*) flights
-      ,lag(count(*)) over (order by )
+      ,count(*) - lag(count(*)) over (order by count(*)) diff
   from flight f
   join country c on (lower(f.CHLOCCT) = lower(c.country))
  where Population > 10000000
