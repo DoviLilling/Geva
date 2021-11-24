@@ -12,5 +12,15 @@ limit 3;
 select f.*
   from flight f
   join country c on (lower(f.CHLOCCT) = lower(c.country))
-where "Area in km²" > 1000000;
+ where "Area in km²" > 1000000;
 
+--3
+select c.country
+      ,count(*) flights
+      ,lag(count(*)) over (order by )
+  from flight f
+  join country c on (lower(f.CHLOCCT) = lower(c.country))
+ where Population > 10000000
+group by c.country
+having flights < 50
+order by 2 desc;
