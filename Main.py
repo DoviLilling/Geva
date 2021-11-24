@@ -14,11 +14,7 @@ def dump_data(table_name, data):
     con = sqlite3.connect('flights.db')
 
 
-
 flights = get_flight_data()
-
-print(flights)
 df = pd.DataFrame(flights)
-print(df)
 conn = sqlite3.connect('flights.db')
 df.to_sql('flight', conn, if_exists='replace')
