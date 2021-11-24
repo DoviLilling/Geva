@@ -13,9 +13,9 @@ def get_flight_data():
 
 conn = sqlite3.connect('flights.db')
 
-# flights = get_flight_data()
-# df = pd.DataFrame(flights)
-# df.to_sql('flight', conn, if_exists='replace')
+flights = get_flight_data()
+df = pd.DataFrame(flights)
+df.to_sql('flight', conn, if_exists='replace')
 
 df = pd.read_html('https://www.geonames.org/countries/')[1]
 print(df)
