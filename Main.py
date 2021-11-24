@@ -1,6 +1,7 @@
 import requests as req
 import sqlite3
 import pandas as pd
+import lxml
 
 
 def get_flight_data():
@@ -10,22 +11,12 @@ def get_flight_data():
     return response
 
 
-def get_country_data():
-    # Change username
-    url = 'http://api.geonames.org/countryInfoCSV?username=demo'
-    response = req.post(url)
-    return response
-
-
-def dump_data(table_name, data):
-    con = sqlite3.connect('flights.db')
-
-
-flights = get_flight_data()
-df = pd.DataFrame(flights)
 conn = sqlite3.connect('flights.db')
-df.to_sql('flight', conn, if_exists='replace')
 
-countries = get_country_data()
-print(countries)
+# flights = get_flight_data()
+# df = pd.DataFrame(flights)
+# df.to_sql('flight', conn, if_exists='replace')
 
+df = pd.read_html('https://www.geonames.org/countries/')[1]
+print(df)
+df.to_sql('country', conn, if_exists='replace')
