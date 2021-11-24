@@ -10,6 +10,13 @@ def get_flight_data():
     return response
 
 
+def get_country_data():
+    # Change username
+    url = 'http://api.geonames.org/countryInfoCSV?username=demo'
+    response = req.post(url)
+    return response
+
+
 def dump_data(table_name, data):
     con = sqlite3.connect('flights.db')
 
@@ -18,3 +25,7 @@ flights = get_flight_data()
 df = pd.DataFrame(flights)
 conn = sqlite3.connect('flights.db')
 df.to_sql('flight', conn, if_exists='replace')
+
+countries = get_country_data()
+print(countries)
+
